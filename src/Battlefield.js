@@ -18,7 +18,7 @@ class Battlefield {
     );
   }
 
-  checkIsSpaceBetweenShips()
+  checkIsSpaceBetweenShips() {}
 
   placeShip(x, y, ship, direction) {
     let coords = [];
