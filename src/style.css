@@ -1,0 +1,97 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.gameboard-grid-left,
+.gameboard-grid-right {
+  display: grid;
+  width: 300px;
+  height: 300px;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  border: 1px solid black;
+  position: relative;
+}
+
+.gameboard {
+  position: relative;
+}
+
+.gameboard-grid-left div,
+.gameboard-grid-right div {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.container-main {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.letters {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  border: none;
+
+  left: -30px;
+}
+
+.letters div,
+.nums div {
+  width: 30px;
+  height: 30px;
+  border: none;
+  text-align: center;
+}
+
+.nums {
+  position: absolute;
+  display: flex;
+  top: -30px;
+}
+
+/* .carrier {
+  display: flex;
+  width: 150px;
+  height: 30px;
+  background-color: aqua;
+}
+
+.carrier div {
+  border: 1px solid black;
+  width: 20%;
+  border-collapse: collapse;
+} */
+
+.ship {
+  display: flex;
+  height: 30px;
+  background-color: aqua;
+  width: fit-content;
+  border: 1px solid black;
+}
+
+.ship div {
+  border: 1px solid black;
+  width: 30px;
+  height: 30px;
+  border-collapse: collapse;
+}
+
+.ships {
+  margin-top: 20px;
+  display: flex;
+  /* flex-direction: column; */
+  gap: 10px;
+}
+
+.vertical {
+  flex-direction: column;
+  width: 30px;
+  height: fit-content;
+}

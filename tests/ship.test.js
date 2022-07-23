@@ -1,5 +1,6 @@
 import Ship from '../src/Ship';
 import Battlefield from '../src/Battlefield';
+import Player from '../src/Player';
 
 test('creating ShipObject with length 4', () => {
   const ship = new Ship(4);
@@ -59,7 +60,7 @@ test('check placeShip() with x.y = 1,2 horizontal', () => {
   battlefield.createTable();
 
   battlefield.placeShip(1, 2, ship, 'horizontal');
-  expect(battlefield.table[2][1]).toBe(1);
+  expect(battlefield.table[1][0]).toBe(1);
 });
 
 test('check placeShip() with x.y = 1,2 horizontal', () => {
@@ -68,7 +69,7 @@ test('check placeShip() with x.y = 1,2 horizontal', () => {
   battlefield.createTable();
 
   battlefield.placeShip(1, 2, ship, 'horizontal');
-  expect(battlefield.table[2][2]).toBe(1);
+  expect(battlefield.table[1][1]).toBe(1);
 });
 
 test('check placeShip() with x.y = 1,2 horizontal', () => {
@@ -77,7 +78,7 @@ test('check placeShip() with x.y = 1,2 horizontal', () => {
   battlefield.createTable();
 
   battlefield.placeShip(1, 2, ship, 'horizontal');
-  expect(battlefield.table[2][3]).toBe(1);
+  expect(battlefield.table[1][2]).toBe(1);
 });
 
 test('check placeShip() with x.y = 1,2 horizontal', () => {
@@ -86,7 +87,7 @@ test('check placeShip() with x.y = 1,2 horizontal', () => {
   battlefield.createTable();
 
   battlefield.placeShip(1, 2, ship, 'horizontal');
-  expect(battlefield.table[2][4]).toBe(1);
+  expect(battlefield.table[1][3]).toBe(1);
 });
 
 test('check placeShip() with x.y = 1,2 vertical', () => {
@@ -95,7 +96,7 @@ test('check placeShip() with x.y = 1,2 vertical', () => {
   battlefield.createTable();
 
   battlefield.placeShip(1, 2, ship, 'vertical');
-  expect(battlefield.table[3][1]).toBe(1);
+  expect(battlefield.table[2][0]).toBe(1);
 });
 
 test('check placeShip() with x.y = 1,2 vertical', () => {
@@ -104,7 +105,7 @@ test('check placeShip() with x.y = 1,2 vertical', () => {
   battlefield.createTable();
 
   battlefield.placeShip(1, 2, ship, 'vertical');
-  expect(battlefield.table[4][1]).toBe(1);
+  expect(battlefield.table[3][0]).toBe(1);
 });
 
 test('check placeShip() with x.y = 1,2 vertical', () => {
@@ -113,7 +114,7 @@ test('check placeShip() with x.y = 1,2 vertical', () => {
   battlefield.createTable();
 
   battlefield.placeShip(1, 2, ship, 'vertical');
-  expect(battlefield.table[5][1]).toBe(1);
+  expect(battlefield.table[4][0]).toBe(1);
 });
 
 //check shipArray
@@ -148,7 +149,7 @@ test('check recieveAttach(1,2) for hit', () => {
 
   battlefield.recieveAttack(1, 2);
 
-  expect(battlefield.table[2][1]).toBe(0);
+  expect(battlefield.table[1][0]).toBe(0);
 });
 
 test('check recieveAttach(1,9) for miss', () => {
@@ -159,7 +160,7 @@ test('check recieveAttach(1,9) for miss', () => {
 
   battlefield.recieveAttack(1, 9);
 
-  expect(battlefield.table[9][1]).toBe('-');
+  expect(battlefield.table[8][0]).toBe('-');
 });
 
 test('check recieveAttach(1,2) && recieveAttack(1,3) for gameOver', () => {
@@ -184,4 +185,31 @@ test('check recieveAttach(1,2) && recieveAttack(1,4) for gameOver', () => {
   battlefield.recieveAttack(1, 4);
 
   expect(battlefield.isGameOver).toBe(false);
+});
+
+//test player attack()
+
+test('player attack(1,2)', () => {
+  const ship = new Ship(2);
+  const battlefield = new Battlefield();
+  const player1 = new Player('pesron');
+  battlefield.createTable();
+  battlefield.placeShip(1, 2, ship, 'horizontal');
+
+  const coordinates = player1.attack(1, 2);
+  battlefield.recieveAttack(...coordinates);
+  expect(battlefield.table[1][0]).toBe(0);
+});
+
+test('player randomAttack()', () => {
+  const ship = new Ship(2);
+  const battlefield = new Battlefield();
+  const player1 = new Player('pesron');
+  battlefield.createTable();
+  battlefield.placeShip(1, 2, ship, 'horizontal');
+
+  const coordinates = player1.randomAttack();
+  const [x, y] = player1.randomAttack();
+  battlefield.recieveAttack(x, y);
+  expect(battlefield.table[y - 1][x - 1]).not.toBe('o');
 });

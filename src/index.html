@@ -4,8 +4,81 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>BattleShip</title>
-    <script defer type="module" src="script.js"></script>
+    <script defer type="module" src="./script.js"></script>
   </head>
-  <body></body>
+  <body>
+    <div class="container-main">
+      <div class="gameboard gameboard-left">
+        <div class="letters"></div>
+        <div class="nums"></div>
+        <div class="gameboard-grid-left"></div>
+      </div>
+      <div class="buttons">
+        <button class="start">START</button>
+        <button class="play-again">RESTART</button>
+      </div>
+      <div class="gameboard gameboard-right">
+        <div class="letters"></div>
+        <div class="nums"></div>
+        <div class="gameboard-grid-right"></div>
+      </div>
+    </div>
+    <div class="ships">
+      <div
+        class="carrier 5 ship ship"
+        draggable="true"
+        data-length="5"
+        data-direction="horizontal"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div
+        class="battleship 4 ship"
+        draggable="true"
+        data-length="4"
+        data-direction="horizontal"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div
+        class="destroyer 3 ship"
+        draggable="true"
+        data-length="3"
+        data-direction="horizontal"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div
+        class="submarine 3 ship"
+        draggable="true"
+        data-length="3"
+        data-direction="horizontal"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div
+        class="boat 2 ship"
+        draggable="true"
+        data-length="2"
+        data-direction="horizontal"
+      >
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <button class="rotate">ROTATE</button>
+  </body>
 </html>
