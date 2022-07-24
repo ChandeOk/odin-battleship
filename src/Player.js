@@ -25,7 +25,8 @@ class Player {
         (move) => JSON.stringify(move) === `[${randomX},${randomY}]`
       )
     ) {
-      this.randomAttack();
+      console.log('SAME POINT');
+      return this.randomAttack();
     } else {
       this.moves.push([randomX, randomY]);
       this.isActive = false;

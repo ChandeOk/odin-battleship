@@ -14,6 +14,7 @@ class App {
   gameboardRight;
   players = [];
   isGameOver = false;
+  winner;
 
   carrier = document.querySelector('.carrier');
   battleship = document.querySelector('.battleship');
@@ -44,7 +45,8 @@ class App {
     DOM.appendCoords('left');
 
     this.gameboardRightGrid = DOM.generateGameBoardArray(
-      this.gameboardRight.table
+      this.gameboardRight.table,
+      'pc'
     );
     console.log(this.gameboardRightGrid);
     DOM.appendGameBoardGrid('right', this.gameboardRightGrid);
@@ -53,7 +55,15 @@ class App {
 
   addHandler(event, side = 'right') {
     if (this.isGameOver) return;
-    if (document.querySelectorAll('.ship').length !== 0) return;
+    if (document.querySelectorAll('.ship').length !== 0) {
+      DOM.createErrorMessage();
+      return;
+    }
+    if (document.querySelector('.error'))
+      document.querySelector('.error').remove();
+
+    document.querySelector('.start').classList.add('active');
+
     const gameboardElement = document.querySelector(`.gameboard-${side}`);
     this.players[0].isActive = true;
     console.log(this.players);
@@ -74,7 +84,7 @@ class App {
       gameboardGrid.innerHTML = '';
       DOM.appendGameBoardGrid(
         `${side}`,
-        DOM.generateGameBoardArray(gameBoardSide.table)
+        DOM.generateGameBoardArray(gameBoardSide.table, 'pc')
       );
 
       this.pc.isActive = true;
@@ -106,7 +116,10 @@ class App {
 
   gameOver() {
     this.isGameOver = true;
+    this.winner = this.gameboardRight.isGameOver ? 'Player' : 'PC';
     console.log('GAME OVER');
+    console.log(`${this.winner} WIN!`);
+    DOM.createWinnerMessage(this.winner);
     return;
   }
 
@@ -141,12 +154,11 @@ class App {
       const direction = event.dataTransfer.getData('direction');
       if (direction === 'horizontal' && 10 - y < ship.length.length - 1) return;
       if (direction === 'vertical' && 10 - x < ship.length.length - 1) return;
-      // if(this.gameboardLeft.shipArray.some(ship=>ship.coords.some(coord=>JSON.stringify(coord)===  )))return
+
       console.log(this.gameboardLeft.shipArray);
       console.log(this.gameboardLeft.table);
       // debugger;
 
-      // if (this.gameboardLeft.placeShip(+y, +x, ship, direction) === 404) return;
       const isOk = this.gameboardLeft.placeShip(+y, +x, ship, direction);
       gameboardGrid.innerHTML = '';
       DOM.appendGameBoardGrid(
@@ -188,32 +200,9 @@ class App {
     console.log(this.gameboardRight.table);
     DOM.appendGameBoardGrid(
       'right',
-      DOM.generateGameBoardArray(this.gameboardRight.table)
+      DOM.generateGameBoardArray(this.gameboardRight.table, 'pc')
     );
   }
 }
-
-// document
-//   .querySelector('.gameboard-grid-left')
-//   .addEventListener('drop', function (event) {
-//     event.preventDefault();
-//     console.log('ook');
-//     console.log(event.target.closest('div'));
-//     const target = event.target.closest('div');
-//     const [x, y] = target.dataset.id.split(',');
-//     const carrier = new Ship(4);
-//     app.gameboardLeft.placeShip(+y, +x, carrier, 'horizontal');
-//     console.log(app.gameboardLeft.table);
-//     this.innerHTML = '';
-//     DOM.appendGameBoardGrid(
-//       'left',
-//       DOM.generateGameBoardArray(app.gameboardLeft.table)
-//     );
-
-//     // for (let i = 0; i < carrier.length.length; i++) {
-//     //   const wtf = document.querySelector(`[data-id='${+x},${+y + i}']`);
-//     //   wtf.style.backgroundColor = 'black';
-//     // }
-//   });
 
 export default App;

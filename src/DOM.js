@@ -7,9 +7,8 @@ class DOM {
         const div = document.createElement('div');
         div.textContent = element;
         if (div.textContent === '1' && type === 'player') {
+          console.log(type);
           div.classList.add('ship--on-board');
-          // div.style.backgroundColor = 'black';
-          // div.style.border = '1px solid white';
         }
         if (div.textContent === '0') {
           div.classList.add('hit');
@@ -130,6 +129,32 @@ class DOM {
 
     parentElement.innerHTML = '';
     parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  createErrorMessage() {
+    if (document.querySelector('.error')) return;
+    const parentEl = document.querySelector('.buttons');
+    const el = document.createElement('h2');
+    el.textContent = 'Please place all ships';
+    el.classList.add('error');
+    parentEl.appendChild(el);
+  }
+
+  disableOpacityOnStart() {
+    document.querySelector('.start').classList.remove('active');
+  }
+
+  createWinnerMessage(winner) {
+    const parentEl = document.querySelector('.buttons');
+    const el = document.createElement('h2');
+    el.textContent = `${winner} WIN! 💪`;
+    el.classList.add('winner');
+    parentEl.appendChild(el);
+  }
+
+  deleteWinnerMessage() {
+    if (document.querySelector('.winner'))
+      document.querySelector('.winner').remove();
   }
 }
 

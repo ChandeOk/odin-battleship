@@ -131,6 +131,7 @@ h1 {
   font-family: 'Bebas Neue', cursive;
   letter-spacing: 5px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .ship--on-board {
@@ -165,4 +166,49 @@ h1 {
   color: #d0ebff;
 
   cursor: pointer;
+}
+
+.rules {
+  position: absolute;
+  top: 56%;
+  right: 20%;
+  /* background-color: #008bc6; */
+  width: 100px;
+  height: 100px;
+  color: #a5d8ff;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 3rem;
+}
+ul {
+  list-style: square;
+}
+
+ul .rules-hit::marker {
+  /* font-size: 4rem; */
+  color: #a43f5d;
+}
+
+ul .rules-miss::marker {
+  color: #a5d8ff;
+}
+
+.error {
+  font-family: 'Bebas Neue', cursive;
+  text-align: center;
+  font-size: 3em;
+  color: #a5d8ff;
+  letter-spacing: 2px;
+  /* border: 2px solid #a5d8ff; */
+}
+
+.active {
+  opacity: 50%;
+}
+
+.winner {
+  font-family: 'Bebas Neue', cursive;
+  text-align: center;
+  font-size: 5em;
+  color: #00cfa7;
+  letter-spacing: 2px;
 }

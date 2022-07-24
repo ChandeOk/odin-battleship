@@ -23,9 +23,6 @@ class Battlefield {
     for (const ship of this.shipArray) {
       str += JSON.stringify(ship.coords) + ' ';
     }
-    // coords.some((coord, i) => {
-    //   const fake = [[coord[0]][coord[1]+1]]
-    // });
     if (direction === 'vertical') {
       //ПРОВЕРКА ТОЛЬКО ПО ГОРИЗОНТАЛИ И ВЕРТИКАЛИ ДЛЯ ВЕРТИКАЛЬНЫХ КОРАБЛЕЙ ** ДЛЯ ПЕРВОЙ И ПОСЛЕДНЕЙ ЯЧЕЙКИ
       const fake = coords[0][0] + ',' + (coords[0][1] + 1);
@@ -98,33 +95,19 @@ class Battlefield {
         console.log('------------vertical allert for middle cells-----------');
         return true;
       }
-      // console.log(fakeHorMiddleArray);
-
-      // console.log(
-      //   fakeHor,
-      //   fakeHorLast,
-      //   fakeHor2,
-      //   fakeHorLast2,
-      //   fakeHor3,
-      //   fakeHorLast3
-      // );
     }
-    // console.log(coords);
-    // console.log(str);
   }
 
   placeShip(x, y, ship, direction) {
     let coords = [];
     if (direction === 'horizontal') {
       for (let i = 0; i < ship.length.length; i++) {
-        // this.table[y - 1][x + i - 1] = 1;
         coords.push([y - 1, x + i - 1]);
         ship.direction = direction;
       }
     }
     if (direction === 'vertical') {
       for (let i = 0; i < ship.length.length; i++) {
-        // this.table[y + i - 1][x - 1] = 1;
         coords.push([y + i - 1, x - 1]);
         ship.direction = direction;
       }
@@ -142,10 +125,6 @@ class Battlefield {
 
     this.shipArray.push(ship);
 
-    // if (this.checkIsSpaceBetweenShips(coords, direction)) {
-    //   console.log('NO--SPACE-----');
-    //   return 404;
-    // }
     // debugger;
 
     if (direction === 'horizontal') {
@@ -222,11 +201,6 @@ class Battlefield {
         10 - randomX < ships[i].length.length
       )
         continue;
-      // if (
-      //   10 - randomX < ships[i].length.length ||
-      //   10 - randomY < ships[i].length.length
-      // )
-      //   continue;
 
       if (this.placeShip(randomY, randomX, ships[i], randomDirection) !== 404)
         i++;
