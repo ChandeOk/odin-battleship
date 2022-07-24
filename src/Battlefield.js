@@ -43,19 +43,15 @@ class Battlefield {
         fakeVertMiddleArray.push(fakeVertMiddle, fakeVertMiddle2);
       }
       if (fakeVertMiddleArray.some((coord) => str.includes(coord))) {
-        console.log('----------vertical allert for middle cells-----------');
         return true;
       }
       if (str.includes(fake) || str.includes(fakeLast)) {
-        console.log('KEEEEEEEEEEEK');
         return true;
       }
       if (str.includes(fake2) || str.includes(fakeLast2)) {
-        console.log('1!11!111!1111!!!1');
         return true;
       }
       if (str.includes(fake3) || str.includes(fakeLast3)) {
-        console.log('VERTICAAAAAAAAAAAAAAAAAL');
         return true;
       }
     }
@@ -80,19 +76,15 @@ class Battlefield {
       }
 
       if (str.includes(fakeHor) || str.includes(fakeHorLast)) {
-        console.log('------------vertical allert--------------');
         return true;
       }
       if (str.includes(fakeHor2) || str.includes(fakeHorLast2)) {
-        console.log('------------vertical allert--------------');
         return true;
       }
       if (str.includes(fakeHor3) || str.includes(fakeHorLast3)) {
-        console.log('----------horizontal allert---------');
         return true;
       }
       if (fakeHorMiddleArray.some((coord) => str.includes(coord))) {
-        console.log('------------vertical allert for middle cells-----------');
         return true;
       }
     }
@@ -119,7 +111,6 @@ class Battlefield {
       this.checkIsShipsCrossed(coords) ||
       this.checkIsSpaceBetweenShips(coords, direction)
     ) {
-      console.log('wtf');
       return 404;
     }
 
@@ -139,8 +130,6 @@ class Battlefield {
     }
 
     // if (direction === 'vertical') this.checkIsSpaceBetweenShips(coords);
-    console.log(this.shipArray);
-    console.log(JSON.stringify(this.shipArray));
   }
 
   recieveAttack(x, y) {
@@ -180,11 +169,9 @@ class Battlefield {
   }
 
   placeRandom(ships) {
-    console.log(ships);
     let i = 0;
     // debugger;
     do {
-      console.log('start');
       const max = 10;
 
       const randomX = Math.floor(Math.random() * (max - 1 + 1)) + 1;

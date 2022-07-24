@@ -7,7 +7,6 @@ class DOM {
         const div = document.createElement('div');
         div.textContent = element;
         if (div.textContent === '1' && type === 'player') {
-          console.log(type);
           div.classList.add('ship--on-board');
         }
         if (div.textContent === '0') {
@@ -25,14 +24,9 @@ class DOM {
     return gridArray;
   }
 
-  generateGameBoardGrid(gameBoard) {
-    const gridArray = this.generateGameBoardArray(gameBoard);
-  }
-
   appendGameBoardGrid(side, grid) {
     const target = document.querySelector(`.gameboard-grid-${side}`);
     console.log(target, side);
-    // grid.forEach(row=>{
     target.append(...grid.flat());
   }
 
@@ -57,11 +51,6 @@ class DOM {
       .querySelector(`.gameboard-${side} .letters`)
       .append(...arrayLettersDivs);
     document.querySelector(`.gameboard-${side} .nums`).append(...arrayNumsDivs);
-  }
-
-  addHandler(event, handler) {
-    const gameboardRightElement = document.querySelector('.gameboard-right');
-    gameboardRightElement.addEventListener('c');
   }
 
   createDraggableShips() {

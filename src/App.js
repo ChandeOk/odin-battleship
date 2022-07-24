@@ -32,15 +32,12 @@ class App {
     this.gameboardRight.createTable();
 
     this.players.push(this.player, this.pc);
-    console.log(this.players);
-    console.log('start');
   }
 
   init() {
     this.gameboardLeftGrid = DOM.generateGameBoardArray(
       this.gameboardLeft.table
     );
-    console.log(this.gameboardLeftGrid);
     DOM.appendGameBoardGrid('left', this.gameboardLeftGrid);
     DOM.appendCoords('left');
 
@@ -48,7 +45,6 @@ class App {
       this.gameboardRight.table,
       'pc'
     );
-    console.log(this.gameboardRightGrid);
     DOM.appendGameBoardGrid('right', this.gameboardRightGrid);
     DOM.appendCoords('right');
   }
@@ -66,19 +62,14 @@ class App {
 
     const gameboardElement = document.querySelector(`.gameboard-${side}`);
     this.players[0].isActive = true;
-    console.log(this.players);
     gameboardElement.addEventListener('click', (e) => {
       if (!this.player.isActive) return;
       const clickedCell = e.target.closest('div');
       const gameboardGrid = document.querySelector(`.gameboard-grid-${side}`);
-      console.log(clickedCell);
       const cellCoords = clickedCell.dataset.id;
-      console.log(cellCoords);
       const [x, y] = cellCoords.split(',');
-      console.log(x, y);
       const gameBoardSide =
         side === 'left' ? this.gameboardLeft : this.gameboardRight;
-      console.log(this.gameboardLeft);
 
       gameBoardSide.recieveAttack(...this.player.attack(+y, +x));
       gameboardGrid.innerHTML = '';
@@ -87,16 +78,18 @@ class App {
         DOM.generateGameBoardArray(gameBoardSide.table, 'pc')
       );
 
+      if (this.gameboardLeft.isGameOver || this.gameboardRight.isGameOver) {
+        this.gameOver();
+        return;
+      }
+
       this.pc.isActive = true;
       this.pcTurn();
-      console.log(gameBoardSide.isGameOver);
-      console.log(this.players);
     });
   }
 
   pcTurn() {
     if (!this.pc.isActive) return;
-    console.log('PC MOVE');
     if (this.gameboardLeft.isGameOver || this.gameboardRight.isGameOver) {
       this.gameOver();
       return;
@@ -117,8 +110,6 @@ class App {
   gameOver() {
     this.isGameOver = true;
     this.winner = this.gameboardRight.isGameOver ? 'Player' : 'PC';
-    console.log('GAME OVER');
-    console.log(`${this.winner} WIN!`);
     DOM.createWinnerMessage(this.winner);
     return;
   }
@@ -127,14 +118,11 @@ class App {
     event.dataTransfer.setData('text/plain', event.target.dataset.length);
     event.dataTransfer.setData('direction', event.target.dataset.direction);
     event.dataTransfer.setData('id', event.target.id);
-    console.log(event.dataTransfer.getData('text/plain'));
-    console.log(event.dataTransfer.getData('id'));
   }
 
   dragAndDropHandler() {
     const gameboardGrid = document.querySelector(`.gameboard-grid-left`);
 
-    console.log();
     this.carrier.addEventListener('dragstart', this.setShipLength);
     this.battleship.addEventListener('dragstart', this.setShipLength);
     this.destroyer.addEventListener('dragstart', this.setShipLength);
@@ -155,8 +143,6 @@ class App {
       if (direction === 'horizontal' && 10 - y < ship.length.length - 1) return;
       if (direction === 'vertical' && 10 - x < ship.length.length - 1) return;
 
-      console.log(this.gameboardLeft.shipArray);
-      console.log(this.gameboardLeft.table);
       // debugger;
 
       const isOk = this.gameboardLeft.placeShip(+y, +x, ship, direction);
@@ -195,9 +181,7 @@ class App {
     ]);
     const gameboardGrid = document.querySelector('.gameboard-grid-right');
 
-    console.log(this.gameboardRight.shipArray);
     gameboardGrid.innerHTML = '';
-    console.log(this.gameboardRight.table);
     DOM.appendGameBoardGrid(
       'right',
       DOM.generateGameBoardArray(this.gameboardRight.table, 'pc')
