@@ -70,6 +70,7 @@ document
   .addEventListener('click', app.addHandler.bind(app));
 
 document.querySelector('.play-again').addEventListener('click', () => {
+  DOM.createDraggableShips();
   document
     .querySelectorAll('.gameboard *')
     .forEach((elem) => (elem.innerHTML = ''));
@@ -89,6 +90,7 @@ app.dragAndDropHandler();
 app.rotateHandler();
 app.generatePcShips();
 
+// app.gameboardRight.checkIsSpaceBetweenShips();
 // //test
 
 // const carrier = document.querySelector('.carrier');

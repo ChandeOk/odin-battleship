@@ -53,6 +53,7 @@ class App {
 
   addHandler(event, side = 'right') {
     if (this.isGameOver) return;
+    if (document.querySelectorAll('.ship').length !== 0) return;
     const gameboardElement = document.querySelector(`.gameboard-${side}`);
     this.players[0].isActive = true;
     console.log(this.players);
@@ -112,12 +113,15 @@ class App {
   setShipLength(event) {
     event.dataTransfer.setData('text/plain', event.target.dataset.length);
     event.dataTransfer.setData('direction', event.target.dataset.direction);
+    event.dataTransfer.setData('id', event.target.id);
     console.log(event.dataTransfer.getData('text/plain'));
+    console.log(event.dataTransfer.getData('id'));
   }
 
   dragAndDropHandler() {
     const gameboardGrid = document.querySelector(`.gameboard-grid-left`);
 
+    console.log();
     this.carrier.addEventListener('dragstart', this.setShipLength);
     this.battleship.addEventListener('dragstart', this.setShipLength);
     this.destroyer.addEventListener('dragstart', this.setShipLength);
@@ -143,12 +147,18 @@ class App {
       // debugger;
 
       // if (this.gameboardLeft.placeShip(+y, +x, ship, direction) === 404) return;
-      this.gameboardLeft.placeShip(+y, +x, ship, direction);
+      const isOk = this.gameboardLeft.placeShip(+y, +x, ship, direction);
       gameboardGrid.innerHTML = '';
       DOM.appendGameBoardGrid(
         'left',
         DOM.generateGameBoardArray(this.gameboardLeft.table)
       );
+
+      const shipElement = document.getElementById(
+        event.dataTransfer.getData('id')
+      );
+
+      if (isOk !== 404) shipElement.remove();
     });
   }
 
